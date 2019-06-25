@@ -46,27 +46,21 @@ void draw(vector<card*> &hand, vector<card*> &deck, vector<card*> &discard, int 
 }
 
 void renderHand(vector<card*> hand){
-    for(int i=0; i<hand.size(); ++i){
-        hand.at(i)->render();
+    for(int i=1; i<=10; ++i){
+        for(int j=0; j<hand.size(); ++j){
+            cout<< hand.at(j)->render(i);
+        }
+        cout<<endl;
     }
-    cout<<endl;
 }
 
 void renderDealer(vector<card*> hand){
-    for(int i=0; i<1; ++i){
-        hand.at(i)->render();
+    card a(0,'C');
+    for(int i=1; i<=10; ++i){
+        cout<< hand.at(1)->render(i);
+        cout<< a.render(i);
+        cout<<endl;
     }
-    cout<<" _______________ "<<endl;
-    cout<<"|               |"<<endl;
-    cout<<"|               |"<<endl;
-    cout<<"|               |"<<endl;
-    cout<<"|               |"<<endl;
-    cout<<"|               |"<<endl;
-    cout<<"|               |"<<endl;
-    cout<<"|               |"<<endl;
-    cout<<"|               |"<<endl;
-    cout<<"|_______________|"<<endl;
-    cout<<endl;
 }
 
 void discardHand(vector<card*> &hand, vector<card*> &discard){

@@ -15,7 +15,7 @@ class card{
     
     int getValue();
     card(int, char);
-    void render();
+    string render(int);
 };
 
 #endif
