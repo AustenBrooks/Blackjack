@@ -10,6 +10,8 @@ int card::getValue(){
     int num=value;
     if(num>10)
         num=10;
+    if(num==1)
+        num=11;
     return num;
 }
 
