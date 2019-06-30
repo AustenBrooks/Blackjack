@@ -26,8 +26,8 @@ void shuffle(vector<card*> &deck, vector<card*> &discard){
         discard.pop_back();
     }
     for(int i=0; i<150; i++){
-        int index1=rand()%52;
-        int index2=rand()%52;
+        int index1=rand()%deck.size();
+        int index2=rand()%deck.size();
         card* temp;
         temp=deck.at(index1);
         deck.at(index1)=deck.at(index2);
