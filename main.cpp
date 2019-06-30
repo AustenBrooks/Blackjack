@@ -20,19 +20,31 @@ int main(){
     build(deck);
     shuffle(deck, discard);
     
+    cout<<"The game is blackjack, the goal is to have the highest value hand without going over 21 (going over 21 is called a bust and is an instant loss)."<<endl;
+    cout<<"The dealer will stop drawing once their hand reaches 17. All face cards have a value of 10, Aces can be either 1 or 11 and will change to be whatever gives the best hand"<<endl;
+    cout<<"You can hit (draw a card), stay (stop drawing cards), or double down (double your bet and draw only one card, this can only be done on turn 1)"<<endl;
+    cout<<"If you get blackjack (an Ace and any 10 value card) you will win double your bet, if dealer gets blackjack, you lose (even if you also had blackjack)"<<endl<<endl;
+    
     while(isPlaying){
         bool isBetting=true;
         int bet;
         
         while(isBetting){
+            bet=0;
             cout << "You have $" <<playerCash<<". How much would you like to bet?"<<endl;
             cin>>bet;
             if(bet>playerCash){
-                cout<<"You do not have enough money for that bet. ";
+                cout<<"You do not have enough money for that bet."<<endl;
+            }
+            else if(!cin){
+                cin.clear();
+                cin.ignore();
+                cout<<"Please input a number"<<endl;
             }
             else if(bet<=0){
                 cout<< "That is an invalid bet"<<endl;
             }
+            
             else{
                 playerCash-=bet;
                 isBetting=false;
@@ -46,6 +58,12 @@ int main(){
         int playerScore;
         int dealerScore;
         int turn=1;
+        
+        dealerScore = dealer.at(0)->getValue()+dealer.at(1)->getValue();
+        if(dealerScore==21){
+            isDrawing = false;
+            playerScore = player.at(0)->getValue()+player.at(1)->getValue();
+        }
         while(isDrawing){
             cout<<"Dealer's Hand"<<endl;
             renderDealer(dealer);
@@ -54,7 +72,7 @@ int main(){
             renderHand(player);
             
             
-            string choice=" ";
+            string choice="";
             
             if(turn==1){
                 cout<<"Would you like to: hit, stay, or double down?"<<endl;
@@ -90,12 +108,10 @@ int main(){
             playerScore=0;
             int numAces=0;
             for(int i=0; i<player.size(); ++i){
-                if(player.at(i)->getValue()==1){
+                if(player.at(i)->getValue()==11){
                     ++numAces;
-                    playerScore+=11;
                 }
-                else
-                    playerScore+=player.at(i)->getValue();
+                playerScore+=player.at(i)->getValue();
             }
             while(numAces>0&&playerScore>21){
                 playerScore-=10;
@@ -115,30 +131,28 @@ int main(){
             
             int numAces=0;
             for(int i=0; i<dealer.size(); ++i){
-                if(dealer.at(i)->getValue()==1){
+                if(dealer.at(i)->getValue()==11){
                     ++numAces;
-                    dealerScore+=11;
                 }
-                else
-                    dealerScore+=dealer.at(i)->getValue();
+                dealerScore+=dealer.at(i)->getValue();
             }
             while(numAces>0&&dealerScore>21){
                 dealerScore-=10;
                 numAces--;
             }
         }
+        if(playerScore==21&&player.size()==2)
+            isDrawing=false;
         
         while(isDrawing){
             dealerScore=0;
             int numAces=0;
             
             for(int i=0; i<dealer.size(); ++i){
-                if(dealer.at(i)->getValue()==1){
+                if(dealer.at(i)->getValue()==11){
                     ++numAces;
-                    dealerScore+=11;
                 }
-                else
-                    dealerScore+=dealer.at(i)->getValue();
+                dealerScore+=dealer.at(i)->getValue();
             }
             while(numAces>0&&dealerScore>21){
                 dealerScore-=10;
