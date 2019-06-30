@@ -57,7 +57,7 @@ void renderHand(vector<card*> hand){
 void renderDealer(vector<card*> hand){
     card a(0,'C');
     for(int i=1; i<=10; ++i){
-        cout<< hand.at(1)->render(i);
+        cout<< hand.at(0)->render(i);
         cout<< a.render(i);
         cout<<endl;
     }
