@@ -78,8 +78,6 @@ int main(){
             string choice;
             
             while(1){
-                choice="";
-                cin.clear();
                 if(turn==1)
                     cout<<"Would you like to: hit, stay, or double down?"<<endl;
                 
@@ -91,7 +89,6 @@ int main(){
                 lowercaseString(choice);
                 
                 if(choice=="hit"||choice=="stay"||choice=="double down"){
-                    cout<<"K:"<<endl;
                     break;
                 }
             }
@@ -182,7 +179,7 @@ int main(){
             else if(dealerScore<17)
                 draw(dealer, deck, discard, 1);
             
-            else if(dealerScore>17)
+            else if(dealerScore>=17)
                 isDrawing=false;
         }
         
